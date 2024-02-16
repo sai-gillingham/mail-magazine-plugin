@@ -18,7 +18,7 @@ use Plugin\MailMagazine42\Entity\MailMagazineSendHistory;
 use Eccube\Repository\BaseInfoRepository;
 use Eccube\Entity\BaseInfo;
 use Eccube\Common\EccubeConfig;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Eccube\Repository\CustomerRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
@@ -143,7 +143,7 @@ class MailMagazineService
         MailerInterface $mailer,
         BaseInfoRepository $baseInfoRepository,
         EccubeConfig $eccubeConfig,
-        SessionInterface $session,
+        RequestStack $requestStack,
         CustomerRepository $customerRepository,
         MailMagazineSendHistoryRepository $mailMagazineSendHistoryRepository,
         EntityManagerInterface $entityManager
@@ -151,7 +151,7 @@ class MailMagazineService
         $this->mailer = $mailer;
         $this->BaseInfo = $baseInfoRepository->get();
         $this->eccubeConfig = $eccubeConfig;
-        $this->session = $session;
+        $this->session = $requestStack->getSession();
         $this->customerRepository = $customerRepository;
         $this->mailMagazineSendHistoryRepository = $mailMagazineSendHistoryRepository;
         $this->entityManager = $entityManager;
